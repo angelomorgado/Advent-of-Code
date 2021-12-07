@@ -10,7 +10,6 @@ def checkWin(d):
     l = list(d.values())
     
     matrix = np.array(l).reshape(5,5)
-        
     #Check win conditions
     for i in range(5):
         #Check lines
@@ -70,6 +69,47 @@ def ex1():
                 
         previousNum = i
     
+def ex2():
+   #Reads the first line of results and stores it in a list (Strip gets rid of the \n)
+    results = data.readline().strip().split(',')
+    
+    #gets rid of annoying space
+    space = data.readline()
+    
+    #Reads the remaining of the file and stores it in a list of matrices
+    dictList = []
+    for line in data:
+        auxDict = {}
+        for i in range(5):
+            for f in line.strip().split(' '):
+                auxDict[int(f)] = 0
                 
+            line = data.readline()
+        dictList.append(auxDict)
+    
+    
+    #Goes through the list and adds the checkmark
+    previousNum = -1
+    
+    #List of boards that won 
+    controlList = []
+    
+    for i in results:
+        for d in dictList:   
+            #the last board to win
+            if len(controlList) == len(dictList):
+                sum = sumAllZeroes(controlList[-1])
+                print(sum ,' * ', previousNum ,'= ', sum*int(previousNum))
+                return
 
-ex1()
+            if d not in controlList and checkWin(d):
+                controlList.append(d)
+                continue
+            
+            #If the key exists in the dictionary
+            if d not in controlList and int(i) in d:
+                d[int(i)] = 1
+            
+        previousNum = i          
+
+ex2()
