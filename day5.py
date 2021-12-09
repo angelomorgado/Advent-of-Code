@@ -1,7 +1,7 @@
 import numpy as np
 
-data = open("test.txt","r")
-#data = open("input_day5.txt","r")
+#data = open("test.txt","r")
+data = open("input_day5.txt","r")
 
 
 def addToMatrix(lineMatrix, p):
@@ -33,56 +33,41 @@ def addToMatrix(lineMatrix, p):
         return lineMatrix
     
     #If it's diagonal (exercise 2 comment if you want part 1)
-    #directly porpotional
-    if p[0] - p[1] == p[2] - p[3]:
-        auxMatrix = np.zeros(100).reshape(10,10) 
+    if p[0] - p[1] == p[2] - p[3] or p[0] + p[1] == p[2] + p[3]:
         
-        if p[0] < p[2]:
+        #x and y smaller
+        if p[0] < p[2] and p[1] < p[3]:
             controlDx = 1
-            controlDy = -1
-        else:
+            controlDy = 1
+        #x bigger , y smaller
+        if p[0] > p[2] and p[1] < p[3]:
             controlDx = -1
             controlDy = 1
-        
-        x = p[0]
-        y = p[1]
-        for i in range((p[2] - p[0]) * controlDx + 1):
-            lineMatrix[y][x] += 1
-            auxMatrix[y][x] += 1
-            x += controlDx
-            y += controlDy
-        print("direct: (",p[0],",",p[1],") (",p[2],",",p[3],")")
-        print(auxMatrix)        
-        return lineMatrix
-
-    #invertly porpotional
-    if p[0] + p[1] == p[2] + p[3]:
-        auxMatrix = np.zeros(100).reshape(10,10) 
-        
-        if p[0] < p[2]:
+        #x smaller , y bigger
+        if p[0] < p[2] and p[1] > p[3]:
             controlDx = 1
-            controlDy = 1
-        else:
+            controlDy = -1
+        #x and y bigger
+        if p[0] > p[2] and p[1] > p[3]:
             controlDx = -1
             controlDy = -1
         
         x = p[0]
         y = p[1]
+        
         for i in range((p[2] - p[0]) * controlDx + 1):
             lineMatrix[y][x] += 1
-            auxMatrix[y][x] += 1
             x += controlDx
-            y += controlDy
-        print("Invert: (",p[0],",",p[1],") (",p[2],",",p[3],")")
-        print(auxMatrix,"\n")
+            y += controlDy     
         return lineMatrix
+    
     return lineMatrix
     
 
 def ex1():
     
     lineList = []
-    lineMatrix = np.zeros(100).reshape(10,10) 
+    lineMatrix = np.zeros(1000000).reshape(1000,1000) 
     for l in data:
         #Organize the data
         x1y1,x2y2 = l.strip().split(" -> ")
