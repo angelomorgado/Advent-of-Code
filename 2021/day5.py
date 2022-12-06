@@ -26,13 +26,13 @@ def addToMatrix(lineMatrix, p):
             lineMatrix[i][p[0]] += 1
         return lineMatrix
     
-    #If it's horizontal
+    #If it's horizontal (x)
     if p[1] == p[3]:
         for i in range(p[0], p[2] + controlX,controlX):
             lineMatrix[p[1]][i] += 1
         return lineMatrix
     
-    #If it's diagonal (exercise 2 comment if you want part 1)
+    #If it's diagonal (exercise 2; comment if you want part 1)
     if p[0] - p[1] == p[2] - p[3] or p[0] + p[1] == p[2] + p[3]:
         
         #x and y smaller
