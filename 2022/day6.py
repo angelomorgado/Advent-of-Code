@@ -30,7 +30,6 @@ def part2():
             break
         
         total += 1
-    print(s)
         
     print(total + 14) 
       
