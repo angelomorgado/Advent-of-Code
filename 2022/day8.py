@@ -47,13 +47,8 @@ def part2():
 
             # Top
             top_score = get_visible_trees_count(x, y, top)
-
-            # Bottom
             bottom_score = get_visible_trees_count(x, y, bottom)
-            # Left
             left_score = get_visible_trees_count(x, y, left)
-
-            # Right
             right_score = get_visible_trees_count(x, y, right)
 
             if y == 1 and x == 2 or y == 3 and x == 2:
